@@ -33,7 +33,7 @@ export const TableCaption = ({ length }: { length: number }) => {
   const [t] = useTranslation();
   const message = t("artist_table_caption", { count: length });
   return (
-    <caption>
+    <caption style={{ backgroundColor: "#54524c", color: "white" }}>
       <Typography variant={"subtitle2"}>{message}</Typography>
     </caption>
   );

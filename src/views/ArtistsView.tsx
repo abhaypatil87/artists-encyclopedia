@@ -51,7 +51,7 @@ const ArtistsView = () => {
 
       <SearchBar setResults={setArtists} isLoading={setLoading} />
       {loading && renderLoading()}
-      {artists.length === 0 && renderEmptyResults()}
+      {artists.length === 0 && !loading && renderEmptyResults()}
       {artists.length > 0 && <Artists artists={artists} />}
     </>
   );
