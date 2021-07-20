@@ -17,11 +17,11 @@ i18n.use(LanguageDetector).init({
         artist_table_caption: "Contains total {{count}} artist",
         artist_table_caption_plural: "Contains total {{count}} artists",
         artist_table_aria_label:
-          "a table showing artists from your most recent search",
+          "A table showing artists from your most recent search",
         favourites_table_no_favourite:
           "No favourite artists have been saved yet!",
         favourites_table_aria_label:
-          "a table containing your favourite artists",
+          "A table containing your favourite artists",
         artist_details_artist_details: "Artist Details",
         artist_actions_set_favourite:
           "{{artist}} has been added to your favourites",
