@@ -60,7 +60,7 @@ i18n.use(LanguageDetector).init({
         favourites_table_aria_label:
           "Un tableau contenant vos artistes préférés",
         artist_details_artist_details: "Détails de l'artiste",
-        artist_actions_set_favourite: "{{artiste}} a été ajouté à vos favoris",
+        artist_actions_set_favourite: "{{artist}} a été ajouté à vos favoris",
         artist_actions_unset_favourite:
           "{{artist}} a été retiré de vos favoris",
         artist_actions_button_aria_label_favourite:
