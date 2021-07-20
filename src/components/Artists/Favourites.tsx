@@ -61,11 +61,9 @@ const Favourites = () => {
                   className={classes.actionsCell}
                   onClick={handleFavouriteClick.bind(null, artist, dispatch)}
                   aria-label={t(
-                    `${
-                      artist.isFavourite
-                        ? "artist_actions_button_aria_label_favourite"
-                        : "artist_actions_button_aria_label_unfavourite"
-                    }`
+                    artist.isFavourite
+                      ? "artist_actions_button_aria_label_favourite"
+                      : "artist_actions_button_aria_label_unfavourite"
                   )}
                 >
                   <FavouriteIcon isFavourite={artist.isFavourite} />

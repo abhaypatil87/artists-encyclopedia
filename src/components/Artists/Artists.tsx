@@ -39,7 +39,6 @@ const Artists = (props: { artists: BasicArtist[] }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [t] = useTranslation();
-
   const [artists, setArtists] = useState([...props.artists]);
 
   const handleFavouriteClick = (artist: BasicArtist) => {
@@ -93,9 +92,11 @@ const Artists = (props: { artists: BasicArtist[] }) => {
                 <Button
                   className={classes.actionsCell}
                   onClick={handleFavouriteClick.bind(null, artist)}
-                  aria-label={`Press to ${
-                    artist.isFavourite ? "unfavourite" : "favourite"
-                  }`}
+                  aria-label={t(
+                    artist.isFavourite
+                      ? "artist_actions_button_aria_label_favourite"
+                      : "artist_actions_button_aria_label_unfavourite"
+                  )}
                 >
                   <FavouriteIcon isFavourite={artist.isFavourite} />
                 </Button>

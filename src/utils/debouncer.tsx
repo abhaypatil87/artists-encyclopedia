@@ -7,7 +7,7 @@ function debouncer(value: string) {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
-    }, 800);
+    }, 1000);
     return () => {
       clearTimeout(handler);
     };
