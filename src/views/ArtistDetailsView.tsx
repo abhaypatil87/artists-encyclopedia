@@ -39,7 +39,7 @@ const ArtistDetailsView = () => {
 
   useEffect(() => {
     getArtistReleases();
-  }, []);
+  }, [getArtistReleases]);
 
   useEffect(() => {
     setLoading(result.loading);
@@ -95,7 +95,7 @@ const ArtistDetailsView = () => {
       {loading && renderLoading()}
       {releases &&
         releases.map((release: ReleaseWithCover) => (
-          <ReleaseTile release={release} />
+          <ReleaseTile key={release.id} release={release} />
         ))}
     </>
   );
