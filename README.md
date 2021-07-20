@@ -1,5 +1,8 @@
 # The Encyclopedia of Artists
 ## Front-End app
+
+## See it in action
+The application has been deployed on Netlify and is available here [Artists-Encyclopedia](https://artists-encyclopedia.netlify.app/)
 ## Introduction
 The user facing app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In order to achieve the task at hand, below NPM packages, frameworks, and libraries were consumed
