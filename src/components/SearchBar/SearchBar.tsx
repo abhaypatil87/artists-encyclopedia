@@ -7,7 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { Paper, InputBase, IconButton } from "@material-ui/core";
 
-import debouncer from "../../utils/debouncer";
+import { useDebouncedValue } from "../../utils/debouncer";
 import { BasicArtist } from "../../declarations";
 import { isArtistFavourite } from "../../utils/utils";
 import { GET_ARTISTS } from "../../graphql/queries";
@@ -40,7 +40,7 @@ const SearchBar = ({ setResults, isLoading }: SearchPropOptions) => {
   const classes = useStyles();
   const [t] = useTranslation();
   const [searchInput, setSearchInput] = useState("");
-  const debouncedSearchInput = debouncer(searchInput);
+  const debouncedSearchInput = useDebouncedValue(searchInput, 1000);
   const [searchDisabled, setSearchDisabled] = useState(true);
   const favouriteArtists = useSelector(
     (state: RootStateOrAny) => state.favourites.favourites
@@ -48,7 +48,7 @@ const SearchBar = ({ setResults, isLoading }: SearchPropOptions) => {
 
   const [getArtists, result] = useLazyQuery(GET_ARTISTS, {
     variables: {
-      query: searchInput.toString().trim(),
+      query: debouncedSearchInput.toString().trim(),
     },
   });
 

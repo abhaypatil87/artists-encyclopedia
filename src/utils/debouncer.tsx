@@ -1,18 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import debounce from "lodash/debounce";
 
-function debouncer(value: string) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [debouncedValue, setDebouncedValue] = useState(value);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export function useDebouncedValue<T>(input: T, time = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(input);
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, 1000);
+    const timeout = setTimeout(() => {
+      setDebouncedValue(input);
+    }, time);
+
     return () => {
-      clearTimeout(handler);
+      clearTimeout(timeout);
     };
-  }, [value]);
+  }, [input, time]);
+
   return debouncedValue;
 }
 
-export default debouncer;
+export function useDebouncedCallback<T extends (...args: any) => any>(
+  callback: T,
+  wait?: number
+) {
+  return useMemo(() => debounce(callback, wait), [callback, wait]);
+}
