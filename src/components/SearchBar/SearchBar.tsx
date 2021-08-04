@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { FormEvent, useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
 import { makeStyles } from "@material-ui/styles";
 import { styled } from "@material-ui/core/styles";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -46,7 +46,7 @@ const SearchBar = ({ setResults, isLoading }: SearchPropOptions) => {
     (state: RootStateOrAny) => state.favourites.favourites
   );
 
-  const [getArtists, result] = useLazyQuery(GET_ARTISTS, {
+  const { loading, data } = useQuery(GET_ARTISTS, {
     variables: {
       query: debouncedSearchInput.toString().trim(),
     },
@@ -63,15 +63,14 @@ const SearchBar = ({ setResults, isLoading }: SearchPropOptions) => {
   useEffect(() => {
     if (debouncedSearchInput && debouncedSearchInput.length > 0) {
       searchHistory.setLastSavedSearch(debouncedSearchInput);
-      getArtists();
     }
-  }, [getArtists, debouncedSearchInput]);
+  }, [debouncedSearchInput]);
 
   useEffect(() => {
-    isLoading(result.loading);
-    if (result.data) {
+    isLoading(loading);
+    if (data) {
       const nodes: Array<BasicArtist> = [];
-      result.data.search.artists.nodes.forEach((node: BasicArtist) => {
+      data.search.artists.nodes.forEach((node: BasicArtist) => {
         const newNode = { ...node };
         newNode.isFavourite = isArtistFavourite(favouriteArtists, node);
         nodes.push(newNode);
@@ -80,9 +79,9 @@ const SearchBar = ({ setResults, isLoading }: SearchPropOptions) => {
     } else {
       setResults([]);
     }
-  }, [setResults, result, favouriteArtists, isLoading]);
+  }, [setResults, data, favouriteArtists, loading]);
 
-  const formSubmitHandler = (event: any) => {
+  const formSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     if (searchInput !== null) {
       if (searchInput.trim().length === 0) {

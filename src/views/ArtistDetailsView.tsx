@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Link, useParams } from "react-router-dom";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { Box, Breadcrumbs, Typography } from "@material-ui/core";
@@ -27,24 +27,18 @@ const ArtistDetailsView = () => {
   const [t] = useTranslation();
   const [releases, setReleases] = useState([]);
   const [artist, setArtist] = useState<BasicArtist>(initialArtistState);
-  const [loading, setLoading] = useState(false);
   const favouriteArtists = useSelector(
     (state: RootStateOrAny) => state.favourites.favourites
   );
-  const [getArtistReleases, result] = useLazyQuery(GET_RELEASES, {
+  const { data, loading } = useQuery(GET_RELEASES, {
     variables: {
       mbid: params.mbid.toString().trim(),
     },
   });
 
   useEffect(() => {
-    getArtistReleases();
-  }, [getArtistReleases]);
-
-  useEffect(() => {
-    setLoading(result.loading);
-    if (result.data) {
-      const { artist } = result.data.lookup;
+    if (data) {
+      const { artist } = data.lookup;
       const newNode = { ...artist };
       newNode.isFavourite = isArtistFavourite(favouriteArtists, artist);
       setArtist(newNode);
@@ -52,7 +46,7 @@ const ArtistDetailsView = () => {
     } else {
       setReleases([]);
     }
-  }, [setArtist, result, favouriteArtists]);
+  }, [setArtist, data, favouriteArtists]);
 
   const renderHelmet = () => {
     return (
