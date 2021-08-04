@@ -45,7 +45,6 @@ It teaches us to and design and develop things with empathy!
 
 Usually I make sure my application is Mobile-Friendly, however due to the fact that the store is of a mixed approach of **Redux + LocalStorage**, any mobile browser would block local-storage for security reasons. Hence, this application may not provide the best mobile device experience. However, if your disable the browser guards, the application will work.
 
-While I had so much fun building this app, I would definitely want to add some features to make it even more usable and appealing.
 As far as I can think of at the moment, some TODO items are as below:
 
 *   **Night Mode**
